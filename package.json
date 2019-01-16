@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/mhigh1/Bamazon-Sequelize/issues"
   },
-  "homepage": "https://github.com/mhigh1/Bamazon-Sequelize#readme"
+  "homepage": "https://github.com/mhigh1/Bamazon-Sequelize#readme",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
 }
