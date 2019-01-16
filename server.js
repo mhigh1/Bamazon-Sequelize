@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 // ROUTES //
-require('./routes/author-api-routes.js')(app);
+require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
 // Sync models and start the express app
