@@ -18,8 +18,6 @@ footer {
 
 #products {
   position: relative;
-  top: -225px; 
-  z-index: 1;  
 }
 
 /* Product Cards */
@@ -37,6 +35,8 @@ footer {
 /* carousel */
 .carousel {
   position: relative;
+  max-height: 250px;
+  overflow: visible;
 }
 
 .carousel-control-next, .carousel-control-prev {
