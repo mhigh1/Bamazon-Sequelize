@@ -14,8 +14,9 @@ module.exports = function(connection, Sequelize) {
         notEmpty: true
       }
     },
-    price: Sequelize.DECIMAL(2,10),
-    stock_quantity: Sequelize.INTEGER
+    price: Sequelize.DECIMAL(10,2),
+    stock_quantity: Sequelize.INTEGER,
+    photo: Sequelize.STRING
   });
 
   return Product;

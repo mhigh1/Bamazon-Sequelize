@@ -1,0 +1,55 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  background: #eaeded;
+  margin-bottom: 50px;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  background-color: #343a40;
+}
+
+#products {
+  position: relative;
+  top: -225px; 
+  z-index: 1;  
+}
+
+/* Product Cards */
+.card-img-top {
+  width: 100%;
+  height: 200px;
+  object-fit: contain;
+  border-radius: .25rem;
+  padding: .5em;
+}
+.card {
+  height: 420px;
+}
+
+/* carousel */
+.carousel {
+  position: relative;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  top: 20%;
+  width: 10%;
+  bottom: auto;
+}
+
+.carousel-item::after {
+  display: block;
+  position: relative;
+  background-image: linear-gradient(to bottom, rgba(255,255,255,0) 0, #eaeded 100%);
+  margin-top: -200px;
+  height: 200px;
+  content: '';
+}
