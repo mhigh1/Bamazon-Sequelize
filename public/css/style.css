@@ -45,7 +45,8 @@ footer {
 }
 
 .carousel-control-next, .carousel-control-prev {
-  top: 20%;
+  top: 0;
+  height: 250px;
   width: 10%;
   bottom: auto;
 }
@@ -57,4 +58,10 @@ footer {
   margin-top: -200px;
   height: 200px;
   content: '';
+}
+
+
+/* Cart Modal */
+#cartModal {
+  width: 100%;
 }

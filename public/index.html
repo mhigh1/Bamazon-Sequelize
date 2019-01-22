@@ -16,7 +16,7 @@
           <a class="navbar-brand" href="#">
             <img src="./images/bamazon-logo.png" height="40" alt="bamazon logo">
           </a>
-          <button id="btnCart" type="button" data-toggle="collapse" data-target="#cart" class="btn btn-outline-light"><i class="fas fa-shopping-cart pr-2"></i>Cart</button>
+          <button id="btnCart" type="button" data-toggle="modal" data-target="#cartModal" class="btn btn-outline-light"><i class="fas fa-shopping-cart pr-2"></i>Cart</button>
         </nav>
     </div>
   </header>
@@ -33,11 +33,11 @@
           <img class="d-block w-100" src="./images/slide3.jpg" height="500px" width="1500px" alt="Third slide">
         </div>
       </div>
-      <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev" style="top: 0; height: 250px;">
+      <a class="carousel-control-prev" href="#carousel" role="button" data-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="sr-only">Previous</span>
       </a>
-      <a class="carousel-control-next" href="#carousel" role="button" data-slide="next" style="top: 0; height: 250px;">
+      <a class="carousel-control-next" href="#carousel" role="button" data-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
       </a>
@@ -46,6 +46,39 @@
   </main>
   <footer></footer>
   
+
+
+<!-- Cart Modal -->
+<div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="cartModal">Shopping Cart</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <table id="tblCartItems">
+          <tr>
+            <th width="100%">Item</th>
+            <th style="width: 50px;">Quantity</th>
+            <th style="width: 50px;"></th>
+          </tr>
+          <tr>
+            <td>ITEM</td>
+            <td class="text-center"><input tyle="text" class="text-center" style="width: 50px"/></td>
+            <td class="text-center"><i class="fas fa-trash-alt"></i></td>
+          </tr>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Shopping</button>
+        <button type="button" class="btn btn-primary">Checkout</button>
+      </div>
+    </div>
+  </div>
+</div>
 
   <!-- scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
