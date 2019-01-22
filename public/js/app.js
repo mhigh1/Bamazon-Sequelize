@@ -31,7 +31,7 @@ const getProducts = function() {
     $.get('/api/products')
     .then(function(data){
         renderProducts(data);
-    })
+    });
 }
   
 getProducts();

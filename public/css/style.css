@@ -8,6 +8,11 @@ body {
   margin-bottom: 50px;
 }
 
+main {
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
 footer {
   position: absolute;
   bottom: 0;
