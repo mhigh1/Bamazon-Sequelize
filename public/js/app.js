@@ -70,11 +70,16 @@ const renderProducts = function(array) {
 // Render the Cart
 const renderCart = function() {
     $('div.modal-body').empty();
+    $('#btnCheckout').show();
     
-    // If cart is empty display empty notice, otherwise render cart
+    // If cart is empty display empty notice and disable checkout button, otherwise render cart
     if(arrCart.length === 0) {
         $('div.modal-body').html('<span class="font-italic">There are currently no items in your cart.</span>');
+        $('#btnCheckout').attr('disabled', true);
     } else {
+        // If the cart is not empty, then enable the checkout button
+        $('#btnCheckout').removeAttr('disabled');
+
         // Create the cart table
         let cartTable = $('<table>').attr("id","tblCartItems");
         cartTable.addClass('table table-sm');
@@ -174,7 +179,7 @@ const updateCart = function(itemNo, qty) {
 const processOrder = function() {
     let cartModified = false;
     let messages = $('<ul>').attr("id","cartMessageList");
-    
+
     // Foreach product in cart array, check the stock level
     arrCart.forEach(product => {
         if(product.qty > product.stockQty) {
@@ -221,7 +226,7 @@ const processOrder = function() {
         // Display order submitted message
         $('.modal-body').empty();
         $('.modal-body').append(`<span class="text-success"><i class="far fa-check-circle"></i> Your order has been submitted successfully!</span>`);
-        $('.modal-footer').html(`<button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Shopping</button>`);
+        $('#btnCheckout').hide();
 
         // Empty the cart and reset the cart counter
         arrCart.length = 0;
