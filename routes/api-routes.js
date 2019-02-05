@@ -23,12 +23,15 @@ module.exports = function(app) {
     });
   });
 
-  app.post('/api/product', function(req, res) {
-    db.Product.create(req.body)
-    .then(function(data) {
-      res.json(data);
+  app.put('/api/product/:id', function(req, res) {
+    db.Product.update(req.body, {
+      where: { 
+        id: req.params.id 
+      }
+    }).then(function(data) {
+      res.json({ success: true, data: data });
     }).catch(function(error) {
-      res.json(error);
+      res.json({ success: false, error: error });
     });
   });
   

@@ -23,7 +23,7 @@ require('./routes/api-routes.js')(app);
 require('./routes/html-routes.js')(app);
 
 // Sync models and start the express app
-db.sequelize.sync({ force: true }).then(function() {
+db.sequelize.sync({ force: false }).then(function() {
   app.listen(PORT, function() {
     console.log(`Bamazon-Sequelize is listening on PORT ${PORT}`);
   });

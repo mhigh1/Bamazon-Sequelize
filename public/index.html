@@ -16,7 +16,7 @@
           <a class="navbar-brand" href="#">
             <img src="./images/bamazon-logo.png" height="40" alt="bamazon logo">
           </a>
-          <button id="btnCart" type="button" data-toggle="modal" data-target="#cartModal" class="btn btn-outline-light"><i class="fas fa-shopping-cart pr-2"></i>Cart</button>
+          <button id="btnCart" type="button" data-toggle="modal" data-target="#cartModal" class="btn btn-outline-light"><i class="fas fa-shopping-cart pr-2"></i>Cart <span id="cartCounter">(0)</span></button>
         </nav>
     </div>
   </header>
@@ -50,7 +50,7 @@
 
 <!-- Cart Modal -->
 <div class="modal fade" id="cartModal" tabindex="-1" role="dialog" aria-labelledby="cartModal" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="cartModal">Shopping Cart</h5>
@@ -58,23 +58,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <table id="tblCartItems">
-          <tr>
-            <th width="100%">Item</th>
-            <th style="width: 50px;">Quantity</th>
-            <th style="width: 50px;"></th>
-          </tr>
-          <tr>
-            <td>ITEM</td>
-            <td class="text-center"><input tyle="text" class="text-center" style="width: 50px"/></td>
-            <td class="text-center"><i class="fas fa-trash-alt"></i></td>
-          </tr>
-        </table>
-      </div>
+      <div class="modal-body"></div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Continue Shopping</button>
-        <button type="button" class="btn btn-primary">Checkout</button>
+        <button id="btnCheckout" type="button" class="btn btn-primary">Checkout</button>
       </div>
     </div>
   </div>
