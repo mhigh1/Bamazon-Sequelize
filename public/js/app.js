@@ -110,16 +110,32 @@ const renderCart = function() {
         $('#tblCartItems tbody').append(`<tr class="font-weight-bold"><td colspan="3" class="text-right">Total:</td><td>$${orderTotal.toLocaleString()}</td><td></td></tr>`);
     }
     // Update cart counter
-    countCartItems();
+    updateCartCounter(arrCart);
 }
 
 // Count the number of items in the cart and render on Cart button
-const countCartItems = function() {
+// const countCartItems = function() {
+//     let count = 0;
+//     arrCart.forEach(product => {
+//         count += product.qty;
+//     });
+//     $('#cartCounter').html(`(${count})`);
+// }
+
+const setHtml = (element, string) => {
+    $(element).html(string);
+}
+
+const countCartItems = (array) => {
     let count = 0;
-    arrCart.forEach(product => {
+    array.forEach(product => {
         count += product.qty;
     });
-    $('#cartCounter').html(`(${count})`);
+    return count;
+}
+
+const updateCartCounter = function(array) {
+    setHtml('#cartCounter', `(${countCartItems(array)})`);
 }
 
 // Add an Item to the Cart Array
@@ -145,7 +161,7 @@ const addItemToCart = function(itemNo) {
         }
 
         // Update cart item count
-        countCartItems();
+        updateCartCounter(arrCart);
     });
 
 }
@@ -154,7 +170,7 @@ const addItemToCart = function(itemNo) {
 const removeItemFromCart = function(itemNo) {
     let pos = arrCart.findIndex(el => el.itemNo === itemNo);
     arrCart.splice(pos, 1);
-    countCartItems();
+    updateCartCounter(arrCart);
 }
 
 // Update the item quantity from cart
@@ -171,7 +187,7 @@ const updateCart = function(itemNo, qty) {
         let pos = arrCart.findIndex(product => product.itemNo === itemNo);
         arrCart[pos].qty = qty;
         renderCart();
-        countCartItems();
+        updateCartCounter(arrCart);
     }
 }
 
@@ -230,7 +246,7 @@ const processOrder = function() {
 
         // Empty the cart and reset the cart counter
         arrCart.length = 0;
-        countCartItems();
+        updateCartCounter(arrCart);
         
     }
 }
