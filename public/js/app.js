@@ -92,14 +92,14 @@ const renderCart = function() {
         // Foreach item in the array, create a row and append to table
         arrCart.forEach(product => {
             
-            let unitPrice = parseFloat(product.itemPrice, 2).toLocaleString();
-            let lineTotal = parseFloat(product.qty * product.itemPrice, 2);
-            orderTotal += parseFloat(lineTotal, 2);
+            let unitPrice = parseFloat(product.itemPrice).toFixed(2);
+            let lineTotal = parseFloat(product.qty * product.itemPrice).toFixed(2);
+            orderTotal += parseFloat(lineTotal).toFixed(2);
             let row = `
                 <tr>
                     <td>${product.itemName}</td>
                     <td class="text-center"><input type="text" class="text-center" style="width: 50px" name="quantity" value="${product.qty}" data-item-id="${product.itemNo}" /></td>
-                    <td>$${unitPrice}</td>
+                    <td>$${unitPrice.toLocaleString()}</td>
                     <td>$${lineTotal.toLocaleString()}</td>
                     <td class="text-center"><button type="button" class="btn btnDelete" data-item-id="${product.itemNo}"><i class="fas fa-trash-alt"></i></button</td>
                 </tr>
@@ -122,20 +122,21 @@ const renderCart = function() {
 //     $('#cartCounter').html(`(${count})`);
 // }
 
-const setHtml = (element, string) => {
-    $(element).html(string);
-}
-
 const countCartItems = (array) => {
     let count = 0;
     array.forEach(product => {
-        count += product.qty;
+        count += parseInt(product.qty);
     });
+
+    if(isNaN(count)) {
+        return undefined;
+    }
+
     return count;
 }
 
 const updateCartCounter = function(array) {
-    setHtml('#cartCounter', `(${countCartItems(array)})`);
+    $('#cartCounter').html(`(${countCartItems(array)})`);
 }
 
 // Add an Item to the Cart Array
@@ -168,16 +169,26 @@ const addItemToCart = function(itemNo) {
 
 // Remove an Item from the Cart Array
 const removeItemFromCart = function(itemNo) {
-    let pos = arrCart.findIndex(el => el.itemNo === itemNo);
-    arrCart.splice(pos, 1);
-    updateCartCounter(arrCart);
+        
+    let pos = arrCart.findIndex(el => el.itemNo === parseInt(itemNo));
+    if(pos !== -1) {   
+        arrCart.splice(pos, 1);
+        updateCartCounter(arrCart);
+        return true;
+    }
+
+    if(isNaN(itemNo)) {
+        return undefined;
+    }
+
+    return false;
 }
 
 // Update the item quantity from cart
 const updateCart = function(itemNo, qty) {
     
     // Cast qty as an integer
-    qty = parseInt(qty, 10);
+    qty = parseInt(qty);
     
     // If qty eq 0 then remove the item from the cart, else update the qty in cart array
     if(qty === 0) {
