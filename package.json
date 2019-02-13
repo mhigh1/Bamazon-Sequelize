@@ -4,8 +4,10 @@
   "description": "A storefront using MySQL and Sequelize. The app will take in orders from customers and deplete stock from the store's inventory.",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "test": "NODE_ENV=test mocha tests/test.js",
+    "windowstest": "env NODE_ENV=test mocha tests/test.js",
+    "pstest": "set NODE_ENV=test&& mocha tests/test.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +20,11 @@
   },
   "homepage": "https://github.com/mhigh1/Bamazon-Sequelize#readme",
   "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "dotenv": "^6.2.0",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "mysql2": "^1.6.4",
     "path": "^0.12.7",
     "sequelize": "^4.42.0"

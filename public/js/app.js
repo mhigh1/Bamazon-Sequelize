@@ -92,14 +92,14 @@ const renderCart = function() {
         // Foreach item in the array, create a row and append to table
         arrCart.forEach(product => {
             
-            let unitPrice = parseFloat(product.itemPrice, 2).toLocaleString();
-            let lineTotal = parseFloat(product.qty * product.itemPrice, 2);
-            orderTotal += parseFloat(lineTotal, 2);
+            let unitPrice = parseFloat(product.itemPrice).toFixed(2);
+            let lineTotal = parseFloat(product.qty * product.itemPrice).toFixed(2);
+            orderTotal += parseFloat(lineTotal).toFixed(2);
             let row = `
                 <tr>
                     <td>${product.itemName}</td>
                     <td class="text-center"><input type="text" class="text-center" style="width: 50px" name="quantity" value="${product.qty}" data-item-id="${product.itemNo}" /></td>
-                    <td>$${unitPrice}</td>
+                    <td>$${unitPrice.toLocaleString()}</td>
                     <td>$${lineTotal.toLocaleString()}</td>
                     <td class="text-center"><button type="button" class="btn btnDelete" data-item-id="${product.itemNo}"><i class="fas fa-trash-alt"></i></button</td>
                 </tr>
@@ -110,16 +110,33 @@ const renderCart = function() {
         $('#tblCartItems tbody').append(`<tr class="font-weight-bold"><td colspan="3" class="text-right">Total:</td><td>$${orderTotal.toLocaleString()}</td><td></td></tr>`);
     }
     // Update cart counter
-    countCartItems();
+    updateCartCounter(arrCart);
 }
 
 // Count the number of items in the cart and render on Cart button
-const countCartItems = function() {
+// const countCartItems = function() {
+//     let count = 0;
+//     arrCart.forEach(product => {
+//         count += product.qty;
+//     });
+//     $('#cartCounter').html(`(${count})`);
+// }
+
+const countCartItems = (array) => {
     let count = 0;
-    arrCart.forEach(product => {
-        count += product.qty;
+    array.forEach(product => {
+        count += parseInt(product.qty);
     });
-    $('#cartCounter').html(`(${count})`);
+
+    if(isNaN(count)) {
+        return undefined;
+    }
+
+    return count;
+}
+
+const updateCartCounter = function(array) {
+    $('#cartCounter').html(`(${countCartItems(array)})`);
 }
 
 // Add an Item to the Cart Array
@@ -145,23 +162,33 @@ const addItemToCart = function(itemNo) {
         }
 
         // Update cart item count
-        countCartItems();
+        updateCartCounter(arrCart);
     });
 
 }
 
 // Remove an Item from the Cart Array
 const removeItemFromCart = function(itemNo) {
-    let pos = arrCart.findIndex(el => el.itemNo === itemNo);
-    arrCart.splice(pos, 1);
-    countCartItems();
+        
+    let pos = arrCart.findIndex(el => el.itemNo === parseInt(itemNo));
+    if(pos !== -1) {   
+        arrCart.splice(pos, 1);
+        updateCartCounter(arrCart);
+        return true;
+    }
+
+    if(isNaN(itemNo)) {
+        return undefined;
+    }
+
+    return false;
 }
 
 // Update the item quantity from cart
 const updateCart = function(itemNo, qty) {
     
     // Cast qty as an integer
-    qty = parseInt(qty, 10);
+    qty = parseInt(qty);
     
     // If qty eq 0 then remove the item from the cart, else update the qty in cart array
     if(qty === 0) {
@@ -171,7 +198,7 @@ const updateCart = function(itemNo, qty) {
         let pos = arrCart.findIndex(product => product.itemNo === itemNo);
         arrCart[pos].qty = qty;
         renderCart();
-        countCartItems();
+        updateCartCounter(arrCart);
     }
 }
 
@@ -230,7 +257,7 @@ const processOrder = function() {
 
         // Empty the cart and reset the cart counter
         arrCart.length = 0;
-        countCartItems();
+        updateCartCounter(arrCart);
         
     }
 }
