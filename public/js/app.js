@@ -92,22 +92,22 @@ const renderCart = function() {
         // Foreach item in the array, create a row and append to table
         arrCart.forEach(product => {
             
-            let unitPrice = parseFloat(product.itemPrice).toFixed(2);
-            let lineTotal = parseFloat(product.qty * product.itemPrice).toFixed(2);
-            orderTotal += parseFloat(lineTotal).toFixed(2);
+            let unitPrice = parseFloat(product.itemPrice);
+            let lineTotal = parseFloat(product.qty * product.itemPrice);
+            orderTotal += parseFloat(orderTotal + lineTotal);
             let row = `
                 <tr>
                     <td>${product.itemName}</td>
                     <td class="text-center"><input type="text" class="text-center" style="width: 50px" name="quantity" value="${product.qty}" data-item-id="${product.itemNo}" /></td>
-                    <td>$${unitPrice.toLocaleString()}</td>
-                    <td>$${lineTotal.toLocaleString()}</td>
+                    <td>$${unitPrice.toFixed(2)}</td>
+                    <td>$${lineTotal.toFixed(2)}</td>
                     <td class="text-center"><button type="button" class="btn btnDelete" data-item-id="${product.itemNo}"><i class="fas fa-trash-alt"></i></button</td>
                 </tr>
             `;
             $('#tblCartItems tbody').append(row);
         });
 
-        $('#tblCartItems tbody').append(`<tr class="font-weight-bold"><td colspan="3" class="text-right">Total:</td><td>$${orderTotal.toLocaleString()}</td><td></td></tr>`);
+        $('#tblCartItems tbody').append(`<tr class="font-weight-bold"><td colspan="3" class="text-right">Total:</td><td>$${orderTotal.toFixed(2)}</td><td></td></tr>`);
     }
     // Update cart counter
     updateCartCounter(arrCart);
